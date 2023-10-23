@@ -91,9 +91,86 @@ class App extends React.Component {
         </div>
         <button onClick={this.fetchWeater}>Get Weather</button>
         {this.state.isLoading && <p className="loader">Is loading ...</p>}
+        {this.state.weather.weathercode && (
+          <Weather
+            weather={this.state.weather}
+            location={this.state.displayLocation}
+          />
+        )}
       </div>
     );
   }
 }
 
 export default App;
+
+// class Weather extends React.Component {
+//   render() {
+//     const {
+//       temperature_2m_max: max,
+//       temeprature_2m_min: min,
+//       time: dates,
+//       weathercode: codes,
+//     } = this.props.weather;
+//     return (
+//       <div>
+//         <h2>weather {this.props.location}</h2>
+//         <ul className="weather">
+//           {dates.map((date, i) => (
+//             <Day
+//               date={date}
+//               max={max[i]}
+//               min={min[i]}
+//               code={codes[i]}
+//               key={date}
+//             />
+//           ))}
+//         </ul>
+//       </div>
+//     );
+//   }
+// }
+class Weather extends React.Component {
+  render() {
+    const {
+      temperature_2m_max: max,
+      temperature_2m_min: min,
+      time: dates,
+      weathercode: codes,
+    } = this.props.weather;
+    return (
+      <div>
+        <h2>weather {this.props.location}</h2>
+        <ul className="weather">
+          {dates.map((date, i) => (
+            <Day
+              date={date}
+              max={max[i]}
+              min={min[i]}
+              code={codes[i]}
+              key={date}
+              isToday={i === 0}
+            />
+          ))}
+        </ul>
+      </div>
+    );
+  }
+}
+
+class Day extends React.Component {
+  render() {
+    const { date, max, min, code, isToday } = this.props;
+
+    return (
+      <li className="day">
+        <span>{getWeatherIcon(code)}</span>
+        <p>{isToday ? "Today" : formatDay(date)} </p>
+        <p>
+          {Math.floor(min)} &deg; &mdash;
+          <strong>{Math.ceil(max)}&deg;</strong>
+        </p>
+      </li>
+    );
+  }
+}
