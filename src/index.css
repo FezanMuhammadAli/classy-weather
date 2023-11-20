@@ -49,7 +49,7 @@ input {
   font-family: inherit;
   color: inherit;
   font-size: 2rem;
-  background-color: #f0d2ce;
+  background-color: #add8e6;
   padding: 1.6rem 3.2rem;
   border: none;
   width: 32rem;
@@ -66,7 +66,7 @@ input:focus {
 }
 
 .day {
-  background-color: #f0d2ce;
+  background-color: #add8e6;
   padding: 1.6rem 0 2rem;
   width: 12.8rem;
 
@@ -82,7 +82,7 @@ input:focus {
 }
 
 .day.important {
-  background-color: #ecc5c0;
+  background-color: #add8e6;
   outline: 2px solid #222;
 }
 
